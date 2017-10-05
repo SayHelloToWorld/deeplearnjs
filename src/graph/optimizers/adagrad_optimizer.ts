@@ -27,7 +27,6 @@ export class AdagradOptimizer extends Optimizer {
       protected learningRate: number, protected momentum: number,
       specifiedVariableList?: Node[]) {
     super(learningRate, specifiedVariableList);
-    this.m = Scalar.new(momentum);
     this.eps = Scalar.new(1e-6);
   }
 
@@ -74,12 +73,10 @@ export class AdagradOptimizer extends Optimizer {
 
   dispose() {
     super.dispose();
-    this.m.dispose();
     this.eps.dispose();
     this.accumulatedSquaredGradients.dispose();
   }
 
   private accumulatedSquaredGradients = new TensorArrayMap();
-  private m: Scalar;
   private eps: Scalar;
 }
